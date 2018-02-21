@@ -12,10 +12,15 @@ class StateCapitals
   end
 
   def state_to_capital(state)
-    puts @capitals[@states[state]]
+    if @states[state].nil? || @capitals[@states[state]].nil?
+      puts "Unknown"
+    else
+      puts @capitals[@states[state]]
+    end
   end
 
 end
 
 converter = StateCapitals.new
 converter.state_to_capital("Oregon")
+converter.state_to_capital("New York")
