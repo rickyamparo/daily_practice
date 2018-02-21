@@ -12,19 +12,22 @@ class ScrabbleScorer
     }
   end
 
+  def score(word)
+    score = convert_to_points(word)
+    puts "#{word} has the total score of #{score}"
+  end
+
   def convert_to_points(word)
     score = 0
     letters_array = word.upcase.split('')
     letters_array.each do |letter|
-      # puts "#{letter} has the value of #{@scores[letter]}"
       score += @scores[letter]
     end
-    puts "#{word} has the total score of #{score}"
+    score
   end
 
 end
 
 word = "hello"
-
 converter = ScrabbleScorer.new
-converter.convert_to_points(word)
+converter.score(word)
