@@ -19,8 +19,13 @@ class StateCapitals
     end
   end
 
+  def capital_to_state(capital)
+    puts @states.key(@capitals.key(capital))
+  end
+
 end
 
 converter = StateCapitals.new
 converter.state_to_capital("Oregon")
 converter.state_to_capital("New York")
+converter.capital_to_state("Denver")
