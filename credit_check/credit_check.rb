@@ -1,8 +1,7 @@
 require 'pry'
 class CreditCheck
 
-  def check_validity(card_number)
-    card_array = card_number.split('')
+  def double_digits(card_array)
     doubled_array = []
     card_array.each_with_index do |number, index|
       if index.even?
@@ -11,17 +10,28 @@ class CreditCheck
         doubled_array << number.to_i
       end
     end
+    doubled_array
+  end
 
-    sum_over_ten = []
-    doubled_array.each do |number|
+  def add_digits_over_ten(doubled_array)
+    doubled_array.map do |number|
       if number > 9
-        sum_over_ten << (1 + (number % 10))
+        (1 + (number % 10))
       else
-        sum_over_ten << number
+        number
       end
     end
+  end
 
-    if sum_over_ten.reduce(:+) % 10 == 0
+  def check_validity(card_number)
+    card_array = card_number.split('')
+    doubled_array = double_digits(card_array)
+    sum_over_ten = add_digits_over_ten(doubled_array)
+    validity_output(sum_over_ten.reduce(:+), card_number)
+  end
+
+  def validity_output(sum, card_number)
+    if sum % 10 == 0
       puts "#{card_number} is valid!"
     else
       puts "#{card_number} is invalid!"
